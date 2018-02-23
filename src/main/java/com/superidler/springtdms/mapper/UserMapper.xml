@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.superidler.springtdms.mapper.UserDAO">
+	<!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+	<!--获得所有用户 -->
+	<select id="getAllUsers" resultType="User">
+		select id,userName,password,level from users
+	</select>
+	<!--获得用户对象通过id -->
+	<select id="getUserById" resultType="User">
+		select id,userName,password,level from users where id=#{id}
+	</select>
+		<!--获得用户对象通过用户名 -->
+	<select id="getUserByUserName" resultType="User">
+		select id,userName,password,level from users where userName=#{userName}
+	</select>
+	<!-- 增加 -->
+	<insert id="add">
+		insert into users(userName,password,level)
+		values(#{userName},#{password},#{level})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from users where id=#{id}
+	</delete>
+	<!-- 更新 -->
+	<update id="update">
+		update users set userName=#{userName},password=#{password},level=#{level}
+		where id=#{id}
+	</update>
+</mapper>

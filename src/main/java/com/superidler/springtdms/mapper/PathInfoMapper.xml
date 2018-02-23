@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.superidler.springtdms.mapper.PathInfoDAO">
+	<!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+	<!--获得所有电路信息 -->
+	<select id="getAllPathInfos" resultType="PathInfo">
+		select id,pathName,pathCode,routeInfo,createDate,enable,closeDate,memo from pathinfos
+	</select>
+	<!--获得电路信息对象通过id -->
+	<select id="getPathInfoById" resultType="PathInfo">
+		select id,pathName,pathCode,routeInfo,createDate,enable,closeDate,memo from pathinfos where id=#{id}
+	</select>
+		<!--获得电路信息对象通过电路名 -->
+	<select id="getPathInfosByPathName" resultType="PathInfo">
+		select id,pathName,pathCode,routeInfo,createDate,enable,closeDate,memo from pathinfos where pathName like "%"#{pathName}"%" and enable=#{enable} 
+	</select>
+			<!--获得电路信息对象通过电路编号 -->
+	<select id="getPathInfosByPathCode" resultType="PathInfo">
+		select id,pathName,pathCode,routeInfo,createDate,enable,closeDate,memo from pathinfos where pathCode like "%"#{pathCode}"%" and enable=#{enable} 
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="add">
+		insert into users(userName,password,level)
+		values(#{userName},#{password},#{level})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from users where id=#{id}
+	</delete>
+	<!-- 更新 -->
+	<update id="update">
+		update users set userName=#{userName},password=#{password},level=#{level}
+		where id=#{id}
+	</update>
+</mapper>
